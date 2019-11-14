@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+group 'org.web3j.test'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.28'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation "org.testcontainers:testcontainers:1.12.3"
+}
