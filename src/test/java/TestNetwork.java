@@ -17,7 +17,7 @@ public class TestNetwork {
     private static final Logger logger = LoggerFactory.getLogger(TestNetwork.class);
 
     @Test
-    public void yay() throws IOException {
+    public void yay() {
         try (
                 final Network network = Network.newNetwork();
 
@@ -30,11 +30,15 @@ public class TestNetwork {
         ) {
             foo.start();
 
-            InputStream inputStream = new URL("http://localhost:" + foo.getMappedPort(8080)).openStream();
-            List<String> yay = IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
-            Assert.assertEquals("yay", yay.get(0));
-//        } catch (IOException e) {
-//            e.printStackTrace();
+            try (
+                    InputStream inputStream =
+                            new URL("http://localhost:" + foo.getMappedPort(8080)).openStream();
+            ) {
+                List<String> yay = IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
+                Assert.assertEquals("yay", yay.get(0));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
