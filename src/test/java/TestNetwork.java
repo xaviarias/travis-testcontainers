@@ -7,6 +7,7 @@ import org.testcontainers.containers.Network;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.shaded.org.apache.commons.io.IOUtils;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -16,7 +17,7 @@ public class TestNetwork {
     private static final Logger logger = LoggerFactory.getLogger(TestNetwork.class);
 
     @Test
-    public void yay() throws Exception {
+    public void yay() {
         try (
                 final Network network = Network.newNetwork();
 
@@ -32,6 +33,8 @@ public class TestNetwork {
             InputStream inputStream = new URL("http://localhost:" + foo.getMappedPort(8080)).openStream();
             List<String> yay = IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
             Assert.assertEquals("yay", yay.get(0));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
