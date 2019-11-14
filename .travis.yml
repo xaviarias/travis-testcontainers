@@ -24,5 +24,5 @@ install:
 
 jobs:
   include:
-    - stage: integration test
+    - stage: build master
       script: "./integration-tests.sh"
