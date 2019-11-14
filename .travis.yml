@@ -20,9 +20,9 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 install:
-  - ./gradlew build -x check --no-daemon
+  - ./gradlew build -x check --no-daemon --stacktrace
 
 jobs:
   include:
-    - stage: build master
+    - stage: build
       script: "./integration-tests.sh"
