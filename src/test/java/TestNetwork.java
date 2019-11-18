@@ -30,8 +30,8 @@ public class TestNetwork {
         ) {
             foo.start();
 
-            final InputStream inputStream =
-                    new URL("http://localhost:" + foo.getMappedPort(8080)).openStream();
+            final InputStream inputStream = new URL("http://" + foo.getContainerIpAddress()
+                    + ":" + foo.getMappedPort(8080)).openStream();
 
             final List<String> yay = IOUtils.readLines(inputStream, StandardCharsets.UTF_8);
             Assert.assertEquals("yay", yay.get(0));
